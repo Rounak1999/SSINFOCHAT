@@ -1,0 +1,16 @@
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -12%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(11, 114, 133, 0.16), transparent 70%);
+  pointer-events: none;
+}

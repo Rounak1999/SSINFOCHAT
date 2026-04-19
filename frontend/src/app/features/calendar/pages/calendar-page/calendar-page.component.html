@@ -1,0 +1,45 @@
+<section class="page-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-7 col-lg-8">
+        <div class="glass-card p-4 p-md-5">
+          <div class="mb-4">
+            <span class="badge rounded-pill text-bg-light mb-3">Google Calendar</span>
+            <h1 class="h3 mb-2">Create an event from the dashboard</h1>
+            <p class="text-body-secondary mb-0">
+              This form posts to the Express API, which uses the signed-in user’s Google refresh
+              token to create an event on the primary calendar.
+            </p>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+            <div class="col-12">
+              <label class="form-label" for="title">Title</label>
+              <input id="title" type="text" class="form-control" formControlName="title" />
+              @if (form.controls.title.touched && form.controls.title.invalid) {
+                <div class="text-danger small mt-1">Title is required.</div>
+              }
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="dateTime">Date & time</label>
+              <input
+                id="dateTime"
+                type="datetime-local"
+                class="form-control"
+                formControlName="dateTime"
+              />
+              @if (form.controls.dateTime.touched && form.controls.dateTime.invalid) {
+                <div class="text-danger small mt-1">Date & time is required.</div>
+              }
+            </div>
+
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Create Event</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

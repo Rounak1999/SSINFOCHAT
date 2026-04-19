@@ -1,0 +1,20 @@
+<div class="toast-stack">
+  @for (message of service.messages(); track message.id) {
+    <div
+      class="alert"
+      [class.alert-success]="message.tone === 'success'"
+      [class.alert-danger]="message.tone === 'danger'"
+      [class.alert-info]="message.tone === 'info'"
+    >
+      <div class="d-flex align-items-start justify-content-between gap-3">
+        <span>{{ message.text }}</span>
+        <button
+          class="btn-close"
+          type="button"
+          aria-label="Close"
+          (click)="service.dismiss(message.id)"
+        ></button>
+      </div>
+    </div>
+  }
+</div>

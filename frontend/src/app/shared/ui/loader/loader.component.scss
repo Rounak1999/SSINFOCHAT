@@ -1,0 +1,9 @@
+.loader-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(4px);
+}

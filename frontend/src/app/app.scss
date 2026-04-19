@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-navbar {
+  background: rgba(248, 249, 250, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+}
+
+.app-content {
+  min-height: calc(100vh - 72px);
+}

@@ -1,0 +1,19 @@
+<section class="page-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="glass-card p-4 text-center">
+          @if (error) {
+            <h1 class="h4 mb-3">Authentication failed</h1>
+            <p class="text-body-secondary">{{ error }}</p>
+            <a routerLink="/login" class="btn btn-primary">Return to login</a>
+          } @else {
+            <div class="spinner-border text-primary mb-3" role="status"></div>
+            <h1 class="h4 mb-2">Completing sign-in</h1>
+            <p class="text-body-secondary mb-0">Please wait while your session is being created.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.user-list {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.chat-shell {
+  min-height: 720px;
+}
+
+.chat-header {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.chat-widget {
+  min-height: 640px;
+}
+
+.metadata-panel {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 1rem;
+}
+
+.metadata-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.metadata-bubble {
+  max-width: 90%;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  font-size: 0.95rem;
+}
+
+.metadata-bubble small {
+  display: block;
+  margin-top: 0.35rem;
+  opacity: 0.7;
+}
+
+.metadata-bubble.incoming {
+  background: #edf2ff;
+  align-self: flex-start;
+}
+
+.metadata-bubble.outgoing {
+  background: #d8f3dc;
+  align-self: flex-end;
+}

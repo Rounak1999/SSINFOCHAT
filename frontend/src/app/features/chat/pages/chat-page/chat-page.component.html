@@ -1,0 +1,73 @@
+<section class="page-section">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-xl-3 col-lg-4">
+        <div class="glass-card h-100 p-3">
+          <div class="mb-3">
+            <h1 class="h5 mb-1">Users</h1>
+            <p class="small text-body-secondary mb-0">Select a contact to review metadata history.</p>
+          </div>
+
+          <div class="list-group user-list">
+            @for (user of users(); track user.id) {
+              <button
+                type="button"
+                class="list-group-item list-group-item-action border-0 rounded-3 mb-2"
+                [class.active]="selectedPeerId() === user.id"
+                (click)="selectUser(user.id)"
+              >
+                <div class="fw-medium">{{ user.name }}</div>
+                <div class="small opacity-75">{{ user.email }}</div>
+              </button>
+            }
+          </div>
+
+          @if (selectedPeerId()) {
+            <div class="metadata-panel mt-4">
+              <h2 class="h6">Stored metadata</h2>
+              <div class="metadata-history mb-3">
+                @for (message of metadataHistory(); track message.id) {
+                  <div
+                    class="metadata-bubble"
+                    [class.outgoing]="message.senderId !== selectedPeerId()"
+                    [class.incoming]="message.senderId === selectedPeerId()"
+                  >
+                    <div>{{ message.message }}</div>
+                    <small>{{ message.timestamp | date: 'short' }}</small>
+                  </div>
+                }
+              </div>
+
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="draftMessage"
+                  placeholder="Store note in MySQL"
+                />
+                <button class="btn btn-primary" type="button" (click)="saveMetadataMessage()">
+                  Save
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="col-xl-9 col-lg-8">
+        <div class="glass-card chat-shell p-2 p-md-3">
+          <div class="chat-header px-3 py-2">
+            <h2 class="h5 mb-1">Real-time chat</h2>
+            <p class="small text-body-secondary mb-0">
+              CometChat handles presence, delivery, and live message sync.
+            </p>
+          </div>
+
+          <div class="chat-widget">
+            <cometchat-users-with-messages></cometchat-users-with-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
