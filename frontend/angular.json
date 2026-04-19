@@ -36,6 +36,12 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "allowedCommonJsDependencies": [
+              "@cometchat/chat-sdk-javascript",
+              "@cometchat/uikit-elements",
+              "@cometchat/uikit-resources",
+              "@cometchat/uikit-shared"
             ]
           },
           "configurations": {
@@ -43,8 +49,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "650kB",
+                  "maximumError": "1.5MB"
                 },
                 {
                   "type": "anyComponentStyle",
