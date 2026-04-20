@@ -68,6 +68,28 @@ The Angular app runs on `http://localhost:4200`.
   - `POST /calendar/create-event`
 - The backend uses the signed-in user’s Google tokens to create a primary calendar event.
 
+## Google OAuth Testing Mode (Important)
+
+If your Google OAuth app is still in **Testing** mode, only added test users can sign in.
+
+1. Open Google Cloud Console.
+2. Go to **APIs & Services** -> **OAuth consent screen**.
+3. In **Test users**, click **Add users**.
+4. Add the Google email address that will be used to log in to this app.
+5. Save changes.
+
+Also make sure your OAuth consent/app scopes include Calendar access (for example `https://www.googleapis.com/auth/calendar.events`) so event creation is allowed.
+
+## Check Created Event in Google Calendar
+
+After submitting the event form in this app:
+
+1. Stay signed in with the same Google account used in the app.
+2. Open `https://calendar.google.com`.
+3. Check your **Primary** calendar on the selected date/time.
+4. Confirm timezone is correct if the event appears at a different hour.
+5. Refresh Calendar if needed.
+
 ## Verification
 
 - Backend syntax checked across all files.
