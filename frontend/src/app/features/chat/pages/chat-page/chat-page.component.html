@@ -1,30 +1,41 @@
 <section class="page-section">
-  <div class="container">
-    <div class="row g-4 align-items-stretch">
-      <div class="col-xl-3 col-lg-4">
-        <div class="glass-card h-100 p-3">
-          <div class="mb-3">
-            <h1 class="h5 mb-1">Users</h1>
-            <p class="small text-body-secondary mb-0">Select a contact to review metadata history.</p>
+  <div class="container-fluid h-100 px-3 px-lg-4">
+    <div class="row g-3 h-100">
+      <div class="col-xl-3 col-lg-4 h-100">
+        <div class="glass-card h-100 p-3 d-flex flex-column overflow-hidden sidebar-card">
+          <div class="sidebar-header mb-3">
+            <h1 class="h6 fw-semibold mb-1">
+              <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Users
+            </h1>
+            <p class="small text-body-secondary mb-0">Select a contact to review metadata.</p>
           </div>
 
           <div class="list-group user-list">
             @for (user of users(); track user.id) {
               <button
                 type="button"
-                class="list-group-item list-group-item-action border-0 rounded-3 mb-2"
+                class="list-group-item list-group-item-action user-item border-0 rounded-3 mb-1"
                 [class.active]="selectedPeerId() === user.id"
                 (click)="selectUser(user.id)"
               >
-                <div class="fw-medium">{{ user.name }}</div>
-                <div class="small opacity-75">{{ user.email }}</div>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="user-avatar">{{ user.name.charAt(0) || '?' }}</div>
+                  <div>
+                    <div class="fw-medium small">{{ user.name }}</div>
+                    <div class="text-truncate user-email">{{ user.email }}</div>
+                  </div>
+                </div>
               </button>
             }
           </div>
 
           @if (selectedPeerId()) {
-            <div class="metadata-panel mt-4">
-              <h2 class="h6">Stored metadata</h2>
+            <div class="metadata-panel mt-3">
+              <h2 class="h6 fw-semibold mb-2">
+                <svg class="me-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Metadata
+              </h2>
               <div class="metadata-history mb-3">
                 @for (message of metadataHistory(); track message.id) {
                   <div
@@ -38,12 +49,12 @@
                 }
               </div>
 
-              <div class="input-group">
+              <div class="input-group metadata-input">
                 <input
                   class="form-control"
                   type="text"
                   [(ngModel)]="draftMessage"
-                  placeholder="Store note in MySQL"
+                  placeholder="Store note..."
                 />
                 <button class="btn btn-primary" type="button" (click)="saveMetadataMessage()">
                   Save
@@ -54,17 +65,27 @@
         </div>
       </div>
 
-      <div class="col-xl-9 col-lg-8">
+      <div class="col-xl-9 col-lg-8 h-100">
         <div class="glass-card chat-shell p-2 p-md-3">
           <div class="chat-header px-3 py-2">
-            <h2 class="h5 mb-1">Real-time chat</h2>
-            <p class="small text-body-secondary mb-0">
-              CometChat handles presence, delivery, and live message sync.
-            </p>
+            <h2 class="h6 fw-semibold mb-0">
+              <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Real-time Chat
+            </h2>
           </div>
 
           <div class="chat-widget">
-            <cometchat-users-with-messages></cometchat-users-with-messages>
+            @if (chatReady) {
+              <cometchat-users-with-messages></cometchat-users-with-messages>
+            } @else if (chatError) {
+              <div class="alert alert-danger m-3">{{ chatError }}</div>
+            } @else {
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>

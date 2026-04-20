@@ -13,6 +13,10 @@ function errorHandler(error, req, res, next) {
     return res.status(400).json({ message: 'Validation failed.', errors: error.array() });
   }
 
+  if (error.statusCode) {
+    return res.status(error.statusCode).json({ message: error.message });
+  }
+
   return res.status(500).json({
     message: error.message || 'Internal server error.'
   });

@@ -17,23 +17,43 @@ function getOAuthClient(user) {
 }
 
 async function createEvent(user, payload) {
-  const auth = getOAuthClient(user);
-  const calendar = google.calendar({ version: 'v3', auth });
+  try {
+    const auth = getOAuthClient(user);
+    const calendar = google.calendar({ version: 'v3', auth });
 
-  const response = await calendar.events.insert({
-    calendarId: 'primary',
-    requestBody: {
-      summary: payload.title,
-      start: {
-        dateTime: payload.startDateTime
-      },
-      end: {
-        dateTime: payload.endDateTime
+    const response = await calendar.events.insert({
+      calendarId: 'primary',
+      requestBody: {
+        summary: payload.title,
+        start: {
+          dateTime: payload.startDateTime
+        },
+        end: {
+          dateTime: payload.endDateTime
+        }
       }
-    }
-  });
+    });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    const googleMessage =
+      error?.response?.data?.error?.message ||
+      error?.cause?.message ||
+      error?.message ||
+      'Google Calendar request failed.';
+
+    if (googleMessage.toLowerCase().includes('insufficient authentication scopes')) {
+      const scopedError = new Error(
+        'Google Calendar access is missing required scope. Log out, sign in again, and grant calendar permission.'
+      );
+      scopedError.statusCode = 403;
+      throw scopedError;
+    }
+
+    const calendarError = new Error(`Google Calendar request failed: ${googleMessage}`);
+    calendarError.statusCode = error?.code || 500;
+    throw calendarError;
+  }
 }
 
 module.exports = {

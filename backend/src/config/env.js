@@ -42,6 +42,7 @@ module.exports = {
   cometChat: {
     appId: process.env.COMETCHAT_APP_ID || '',
     region: process.env.COMETCHAT_REGION || '',
-    apiKey: process.env.COMETCHAT_API_KEY || ''
+    apiKey: process.env.COMETCHAT_API_KEY || '',
+    authKey: process.env.COMETCHAT_AUTH_KEY || ''
   }
 };

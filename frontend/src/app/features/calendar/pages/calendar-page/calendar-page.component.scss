@@ -1,16 +1,34 @@
-.glass-card {
+.calendar-card {
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--app-border-glow);
 }
 
-.glass-card::after {
+.calendar-card::after {
   content: '';
   position: absolute;
-  top: -20%;
-  right: -12%;
-  width: 240px;
-  height: 240px;
+  top: -25%;
+  right: -15%;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(11, 114, 133, 0.16), transparent 70%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent 70%);
   pointer-events: none;
+  animation: calendarOrb 12s ease-in-out infinite alternate;
+}
+
+@keyframes calendarOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-10px, 15px) scale(1.1); }
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--app-accent), var(--app-cyan));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
 }

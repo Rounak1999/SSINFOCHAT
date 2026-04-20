@@ -11,4 +11,5 @@ export interface CometChatSession {
   authToken: string;
   appId: string;
   region: string;
+  authKey: string;
 }

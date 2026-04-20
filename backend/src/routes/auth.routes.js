@@ -11,7 +11,8 @@ router.get(
     scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar.events'],
     session: false,
     accessType: 'offline',
-    prompt: 'consent'
+    prompt: 'consent select_account',
+    includeGrantedScopes: false
   })
 );
 

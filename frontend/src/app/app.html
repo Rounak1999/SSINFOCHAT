@@ -3,9 +3,9 @@
 
 <div class="app-shell">
   @if (isAuthenticated() && user(); as currentUser) {
-    <nav class="navbar navbar-expand-lg app-navbar sticky-top">
+    <nav class="navbar navbar-expand-lg app-navbar">
       <div class="container">
-        <a class="navbar-brand fw-semibold" routerLink="/chat">SSInfoChat</a>
+        <a class="navbar-brand" routerLink="/chat">SSInfoChat</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -29,9 +29,9 @@
           </ul>
 
           <div class="d-flex align-items-center gap-3">
-            <div class="text-end">
-              <div class="small text-body-secondary">Signed in as</div>
-              <div class="fw-medium">{{ currentUser.name }}</div>
+            <div class="user-info text-end">
+              <div class="label">Signed in as</div>
+              <div class="name">{{ currentUser.name }}</div>
             </div>
             <button class="btn btn-outline-secondary btn-sm" type="button" (click)="logout()">
               Logout

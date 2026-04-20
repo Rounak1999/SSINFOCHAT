@@ -19,9 +19,16 @@ export class ChatPageComponent {
   protected readonly metadataHistory = this.chatService.metadataHistory;
   protected readonly selectedPeerId = this.chatService.selectedPeerId;
   protected draftMessage = '';
+  protected chatReady = false;
+  protected chatError = '';
 
   constructor() {
-    this.chatService.initialize().catch(() => undefined);
+    this.chatService.initialize().then(() => {
+      this.chatReady = true;
+    }).catch((err) => {
+      console.error('[CometChat] Init failed:', err);
+      this.chatError = err?.message || 'CometChat failed to initialize';
+    });
   }
 
   protected async selectUser(userId: number): Promise<void> {

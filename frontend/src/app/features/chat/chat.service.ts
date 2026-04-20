@@ -20,22 +20,28 @@ export class ChatService {
       return;
     }
 
+    console.log('[CometChat] Fetching session...');
     const session = await firstValueFrom(
       this.http.get<CometChatSession>(`${environment.apiBaseUrl}/auth/chat-token`)
     );
+    console.log('[CometChat] Session received, appId:', session.appId, 'uid:', session.uid);
 
     const settings = new UIKitSettingsBuilder()
       .setAppId(session.appId)
       .setRegion(session.region)
+      .setAuthKey(session.authKey)
       .setAutoEstablishSocketConnection(true)
       .subscribePresenceForAllUsers()
       .build();
 
+    console.log('[CometChat] Initializing UIKit...');
     await CometChatUIKit.init(settings);
+    console.log('[CometChat] UIKit initialized, logging in...');
     await CometChatUIKit.login({
       uid: session.uid,
       authToken: session.authToken
     });
+    console.log('[CometChat] Logged in successfully');
 
     this.initialized = true;
   }

@@ -7,5 +7,26 @@
 }
 
 .alert {
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+  background: var(--app-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 0 20px rgba(99, 102, 241, 0.05);
+  color: var(--app-text);
+}
+
+.alert-success {
+  border-left: 3px solid var(--app-emerald);
+}
+
+.alert-danger {
+  border-left: 3px solid var(--app-rose);
+}
+
+.alert-info {
+  border-left: 3px solid var(--app-cyan);
+}
+
+.btn-close {
+  opacity: 0.5;
 }

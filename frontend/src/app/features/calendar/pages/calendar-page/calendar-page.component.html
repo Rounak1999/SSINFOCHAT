@@ -1,28 +1,34 @@
-<section class="page-section">
+﻿<section class="page-section">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-xl-7 col-lg-8">
-        <div class="glass-card p-4 p-md-5">
+    <div class="row justify-content-center align-items-center" style="min-height: 100%">
+      <div class="col-xl-6 col-lg-7">
+        <div class="glass-card calendar-card p-4 p-md-5">
           <div class="mb-4">
-            <span class="badge rounded-pill text-bg-light mb-3">Google Calendar</span>
-            <h1 class="h3 mb-2">Create an event from the dashboard</h1>
-            <p class="text-body-secondary mb-0">
-              This form posts to the Express API, which uses the signed-in user’s Google refresh
-              token to create an event on the primary calendar.
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <span class="badge rounded-pill text-bg-light">Google Calendar</span>
+            </div>
+            <h1 class="h3 fw-semibold mb-2">Create an Event</h1>
+            <p class="text-body-secondary small mb-0">
+              Post to the Express API using your Google refresh token to create events on your primary calendar.
             </p>
           </div>
 
           <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
             <div class="col-12">
               <label class="form-label" for="title">Title</label>
-              <input id="title" type="text" class="form-control" formControlName="title" />
+              <input id="title" type="text" class="form-control" formControlName="title" placeholder="Meeting with team" />
               @if (form.controls.title.touched && form.controls.title.invalid) {
                 <div class="text-danger small mt-1">Title is required.</div>
               }
             </div>
 
             <div class="col-12">
-              <label class="form-label" for="dateTime">Date & time</label>
+              <label class="form-label" for="dateTime">Date & Time</label>
               <input
                 id="dateTime"
                 type="datetime-local"
@@ -34,8 +40,13 @@
               }
             </div>
 
-            <div class="col-12">
-              <button class="btn btn-primary" type="submit">Create Event</button>
+            <div class="col-12 mt-4">
+              <button class="btn btn-primary px-4" type="submit">
+                <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Create Event
+              </button>
             </div>
           </form>
         </div>

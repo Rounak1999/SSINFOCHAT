@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 const env = require('./env');
 const userRepository = require('../repositories/user.repository');
+const cometchatService = require('../services/cometchat.service');
 
 passport.use(
   new GoogleStrategy(
@@ -22,6 +23,12 @@ passport.use(
           avatarUrl: profile.photos?.[0]?.value || null,
           googleAccessToken: accessToken,
           googleRefreshToken: refreshToken || null
+        });
+
+        cometchatService.upsertUser(user).then(() => {
+          console.log('[CometChat] User registered:', user.id, user.name);
+        }).catch((err) => {
+          console.error('[CometChat] Failed to register user:', err.response?.data || err.message);
         });
 
         done(null, user);

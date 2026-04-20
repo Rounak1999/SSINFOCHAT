@@ -43,7 +43,8 @@ async function chatToken(req, res, next) {
       uid: String(req.user.id),
       authToken,
       appId: env.cometChat.appId,
-      region: env.cometChat.region
+      region: env.cometChat.region,
+      authKey: env.cometChat.authKey
     });
   } catch (error) {
     next(error);
